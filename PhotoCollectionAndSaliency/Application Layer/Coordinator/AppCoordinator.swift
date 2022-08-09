@@ -54,7 +54,7 @@ final class AppCoordinator: Coordinator {
 extension AppCoordinator: PhotoCollectionViewControllerDelegate {
 
     func didSelect(phAsset: PHAsset) {
-        let photoViewController = PhotoViewController(
+        let photoViewController = PhotoWithSaliencyViewController(
             phAsset: phAsset,
             photoService: appContext.photoService,
             saliencyService: appContext.saliencyService

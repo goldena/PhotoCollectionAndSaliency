@@ -25,7 +25,7 @@
 		CF93774728A2809C00214B9A /* PHCachingImageManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93774628A2809C00214B9A /* PHCachingImageManagerService.swift */; };
 		CF93774B28A2812A00214B9A /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93774A28A2812A00214B9A /* PhotoCollectionViewController.swift */; };
 		CF93774D28A2815500214B9A /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93774C28A2815500214B9A /* PhotoCollectionViewCell.swift */; };
-		CF93774F28A2818200214B9A /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93774E28A2818200214B9A /* PhotoViewController.swift */; };
+		CF93774F28A2818200214B9A /* PhotoWithSaliencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93774E28A2818200214B9A /* PhotoWithSaliencyViewController.swift */; };
 		CF93775328A281D900214B9A /* UICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93775228A281D900214B9A /* UICollectionViewFlowLayout.swift */; };
 		CF93775528A281E900214B9A /* ViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93775428A281E900214B9A /* ViewBuilder.swift */; };
 		CF93775728A29B4D00214B9A /* UIProgressView+resetAndHide.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93775628A29B4D00214B9A /* UIProgressView+resetAndHide.swift */; };
@@ -74,7 +74,7 @@
 		CF93774628A2809C00214B9A /* PHCachingImageManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHCachingImageManagerService.swift; sourceTree = "<group>"; };
 		CF93774A28A2812A00214B9A /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
 		CF93774C28A2815500214B9A /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
-		CF93774E28A2818200214B9A /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		CF93774E28A2818200214B9A /* PhotoWithSaliencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWithSaliencyViewController.swift; sourceTree = "<group>"; };
 		CF93775228A281D900214B9A /* UICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		CF93775428A281E900214B9A /* ViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBuilder.swift; sourceTree = "<group>"; };
 		CF93775628A29B4D00214B9A /* UIProgressView+resetAndHide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIProgressView+resetAndHide.swift"; sourceTree = "<group>"; };
@@ -132,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				CF93773728A27F5900214B9A /* Application Layer */,
-				CF93774028A2800A00214B9A /* Services */,
 				CF93774128A2801800214B9A /* Presentation Layer */,
 				CF93770C28A27D4E00214B9A /* Assets.xcassets */,
 				CF93770E28A27D4E00214B9A /* LaunchScreen.storyboard */,
@@ -166,6 +165,7 @@
 				CF93773928A27F8C00214B9A /* AppEnvironment.swift */,
 				CF93773828A27F7700214B9A /* Context */,
 				CF93773B28A27FAD00214B9A /* Coordinator */,
+				CF93774028A2800A00214B9A /* Services */,
 			);
 			path = "Application Layer";
 			sourceTree = "<group>";
@@ -221,7 +221,7 @@
 		CF93774928A280EA00214B9A /* Photo with Saliency */ = {
 			isa = PBXGroup;
 			children = (
-				CF93774E28A2818200214B9A /* PhotoViewController.swift */,
+				CF93774E28A2818200214B9A /* PhotoWithSaliencyViewController.swift */,
 			);
 			path = "Photo with Saliency";
 			sourceTree = "<group>";
@@ -400,7 +400,7 @@
 				CF93774B28A2812A00214B9A /* PhotoCollectionViewController.swift in Sources */,
 				CF93774328A2803200214B9A /* Service.swift in Sources */,
 				CF93770628A27D4E00214B9A /* SceneDelegate.swift in Sources */,
-				CF93774F28A2818200214B9A /* PhotoViewController.swift in Sources */,
+				CF93774F28A2818200214B9A /* PhotoWithSaliencyViewController.swift in Sources */,
 				CF93773A28A27F8C00214B9A /* AppEnvironment.swift in Sources */,
 				CF93775528A281E900214B9A /* ViewBuilder.swift in Sources */,
 				CF93775928A2A19B00214B9A /* SaliencyService.swift in Sources */,

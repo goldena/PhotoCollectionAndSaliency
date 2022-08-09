@@ -7,8 +7,9 @@
 
 import UIKit
 import Photos
+import AVFoundation
 
-final class PhotoViewController: AppViewController {
+final class PhotoWithSaliencyViewController: AppViewController {
 
     private let phAsset: PHAsset
     private weak var photoService: PhotoService?
@@ -72,7 +73,48 @@ final class PhotoViewController: AppViewController {
     }
 
     @objc private func toggleContentMode() {
-        fatalError("not implemented")
+        guard let image = imageView.image else {
+            print("--> image in imageView is nil")
+            return
+        }
+
+        let frame = AVMakeRect(
+            aspectRatio: image.size,
+            insideRect: imageView.bounds
+        )
+
+        let scaleRatio: CGFloat
+        if view.bounds.width > view.bounds.height {
+            scaleRatio = view.bounds.width / frame.width
+        } else {
+            scaleRatio = view.bounds.height / frame.height
+        }
+
+        let scaleTransform: CGAffineTransform
+        switch imageView.contentMode {
+        case .scaleAspectFit:
+            scaleTransform = CGAffineTransform(scaleX: scaleRatio, y: scaleRatio)
+
+        case .scaleAspectFill:
+            scaleTransform = CGAffineTransform(scaleX: 1 / scaleRatio, y: 1 / scaleRatio)
+
+        default:
+            return
+        }
+
+        UIView.animate(withDuration: 0.5) {
+            self.imageView.transform = scaleTransform
+        } completion: { completed in
+            if completed {
+                self.imageView.transform = .identity
+
+                if self.imageView.contentMode == .scaleAspectFit {
+                    self.imageView.contentMode = .scaleAspectFill
+                } else {
+                    self.imageView.contentMode = .scaleAspectFit
+                }
+            }
+        }
     }
 
     private func fetchImage(for phAsset: PHAsset) {
@@ -102,6 +144,7 @@ final class PhotoViewController: AppViewController {
                     case .success((let progress, let image)):
                         if let image = image {
                             self.progressView.resetAndHide()
+
                             self.imageView.image = image
                             self.drawSaliencyFrames()
                         } else {
@@ -122,7 +165,7 @@ final class PhotoViewController: AppViewController {
             return
         }
 
-        saliencyService!.getSaliencyFrames(
+        saliencyService?.getSaliencyFrames(
             image: image,
             saliencyBase: base
         ) { [weak self] result in
