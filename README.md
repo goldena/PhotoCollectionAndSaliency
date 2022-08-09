@@ -14,4 +14,5 @@ irrelevant to the task to avoid spending extra time on calculating ratio for ani
 request number;
 - more sophisticated prefetching mechanism. The one that is used now - linking prefetching data source of 
 the collectionView with the caching mechanism of PHCachingImageManager does not seem to be very effective 
-or my implementation of might be suboptimal.
+or my implementation of might be suboptimal;
+- adding tests
