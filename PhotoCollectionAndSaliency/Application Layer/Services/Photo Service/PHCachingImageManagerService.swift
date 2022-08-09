@@ -127,4 +127,37 @@ final class PHCachingImageManagerService: Service, PhotoService {
             }
         }
     }
+
+    func startCachingPHAssets(
+        _ phAssets: [PHAsset],
+        size: CGSize
+    ) {
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isNetworkAccessAllowed = true
+        requestOptions.deliveryMode = .fastFormat
+
+        phCachingImageManager.startCachingImages(
+            for: phAssets,
+            targetSize: size,
+            contentMode: .aspectFit,
+            options: requestOptions
+        )
+    }
+
+    func stopCachingPHAssets(
+        _ phAssets: [PHAsset],
+        size: CGSize
+    ) {
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isNetworkAccessAllowed = true
+        requestOptions.deliveryMode = .fastFormat
+
+        phCachingImageManager.stopCachingImages(
+            for: phAssets,
+            targetSize: size,
+            contentMode: .aspectFit,
+            options: requestOptions
+        )
+    }
+
 }

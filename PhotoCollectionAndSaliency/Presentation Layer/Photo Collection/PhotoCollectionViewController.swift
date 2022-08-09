@@ -68,7 +68,10 @@ final class PhotoCollectionViewController: AppViewController {
             PhotoCollectionViewCell.self,
             forCellWithReuseIdentifier: PhotoCollectionViewCell.reuseIdentifier
         )
+
         collectionView.dataSource = self
+        collectionView.prefetchDataSource = self
+
         collectionView.delegate = self
 
         photoService?.requestAuthorization { [weak self] isAuthorized in
@@ -149,6 +152,34 @@ extension PhotoCollectionViewController: UICollectionViewDataSource {
         }
 
         return photoCell
+    }
+
+}
+
+// MARK: - UICollectionViewDataSourcePrefetching
+
+extension PhotoCollectionViewController: UICollectionViewDataSourcePrefetching {
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        prefetchItemsAt indexPaths: [IndexPath]
+    ) {
+        let phAssets = indexPaths.map { indexPath in
+            assets[indexPath.item]
+        }
+
+        photoService?.startCachingPHAssets(phAssets, size: thumbnailSize)
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cancelPrefetchingForItemsAt indexPaths: [IndexPath]
+    ) {
+        let phAssets = indexPaths.map { indexPath in
+            assets[indexPath.item]
+        }
+
+        photoService?.stopCachingPHAssets(phAssets, size: thumbnailSize)
     }
 
 }

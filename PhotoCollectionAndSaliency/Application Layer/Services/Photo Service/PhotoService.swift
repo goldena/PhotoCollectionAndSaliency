@@ -35,4 +35,14 @@ protocol PhotoService: Service {
         _ completion: @escaping (Result<(progress: Double, UIImage?), Error>) -> Void
     )
 
+    func startCachingPHAssets(
+        _ phAssets: [PHAsset],
+        size: CGSize
+    )
+
+    func stopCachingPHAssets(
+        _ phAssets: [PHAsset],
+        size: CGSize
+    )
+
 }
