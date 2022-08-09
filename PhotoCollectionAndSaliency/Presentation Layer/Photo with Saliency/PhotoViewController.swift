@@ -12,6 +12,7 @@ final class PhotoViewController: AppViewController {
 
     private let phAsset: PHAsset
     private weak var photoService: PhotoService?
+    private weak var saliencyService: SaliencyService?
 
     private lazy var imageView = UIImageView {
         $0.contentMode = .scaleAspectFit
@@ -23,10 +24,12 @@ final class PhotoViewController: AppViewController {
 
     init(
         phAsset: PHAsset,
-        photoService: PhotoService
+        photoService: PhotoService,
+        saliencyService: SaliencyService
     ) {
         self.phAsset = phAsset
         self.photoService = photoService
+        self.saliencyService = saliencyService
 
         super.init(
             nibName: nil,
@@ -98,8 +101,9 @@ final class PhotoViewController: AppViewController {
                     switch result {
                     case .success((let progress, let image)):
                         if let image = image {
-                            self.imageView.image = image
                             self.progressView.resetAndHide()
+                            self.imageView.image = image
+                            self.drawSaliencyFrames()
                         } else {
                             self.progressView.progress = Float(progress)
                         }
@@ -112,5 +116,35 @@ final class PhotoViewController: AppViewController {
             }
     }
 
+    private func drawSaliencyFrames(base: SaliencyBase = .attention) {
+        guard let image = imageView.image else {
+            print("--> image in imageView is nil")
+            return
+        }
+
+        saliencyService!.getSaliencyFrames(
+            image: image,
+            saliencyBase: base
+        ) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+
+            switch result {
+            case .success(let saliencyFrames):
+                saliencyFrames.forEach { rect in
+                    self.imageView.drawRectangle(
+                        color: .red,
+                        lineWidth: 0.005 * image.size.width,
+                        rect: CGRect(origin: rect.origin, size: rect.size)
+                    )
+                }
+
+            case .failure(let error):
+                print("--> failed to get saliency frames with error: \(error.localizedDescription)")
+            }
+        }
+
+    }
 
 }

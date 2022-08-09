@@ -56,7 +56,8 @@ extension AppCoordinator: PhotoCollectionViewControllerDelegate {
     func didSelect(phAsset: PHAsset) {
         let photoViewController = PhotoViewController(
             phAsset: phAsset,
-            photoService: appContext.photoService
+            photoService: appContext.photoService,
+            saliencyService: appContext.saliencyService
         )
 
         navigationController.pushViewController(

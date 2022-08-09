@@ -41,6 +41,9 @@ final class PhotoCollectionViewController: AppViewController {
             nibName: nil,
             bundle: nil
         )
+
+        // Register as an observer to track changes in the fetched PHAssets
+        PHPhotoLibrary.shared().register(self)
     }
 
     required init?(coder: NSCoder) {
@@ -68,13 +71,10 @@ final class PhotoCollectionViewController: AppViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
 
-        fetchThumbnails()
-    }
-
-    private func fetchThumbnails() {
         photoService?.requestAuthorization { [weak self] isAuthorized in
             guard let self = self,
                   isAuthorized else {
+                print("--> not authorized to use photo library")
                 return
             }
 
@@ -164,6 +164,20 @@ extension PhotoCollectionViewController: UICollectionViewDelegate {
         delegate?.didSelect(phAsset: assets[indexPath.item])
 
         return false
+    }
+
+}
+
+extension PhotoCollectionViewController: PHPhotoLibraryChangeObserver {
+
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        guard let changes = changeInstance.changeDetails(for: assets) else {
+            return
+        }
+
+        if changes.hasMoves || changes.fetchResultBeforeChanges.count != changes.fetchResultAfterChanges.count {
+            fetchPHAssets()
+        }
     }
 
 }

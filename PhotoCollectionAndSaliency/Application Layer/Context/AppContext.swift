@@ -10,17 +10,20 @@ import CoreGraphics
 final class AppContext: Context {
 
     let windowSize: CGSize
+
     let photoService: PhotoService
-//    let saliencyService: SaliencyService
+    let saliencyService: SaliencyService
 
     init(
         windowSize: CGSize,
-        photoService: PhotoService
+
+        photoService: PhotoService,
+        saliencyService: SaliencyService
     ) {
         self.windowSize = windowSize
 
         self.photoService = photoService
-//        self.saliencyService = saliencyService
+        self.saliencyService = saliencyService
 
         super.init(services: [photoService])
     }
