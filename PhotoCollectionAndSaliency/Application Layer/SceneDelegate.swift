@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    private var appCoordinator: AppCoordinator?
 
     func scene(
         _ scene: UIScene,
@@ -25,9 +26,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
 
-        window.rootViewController = ViewController()
-        window.makeKeyAndVisible()
+        let context = AppContext(
+            windowSize: window.bounds.size,
+            photoService: PHPhotoLibraryService()
+        )
+        context.startServices()
+
+        appCoordinator = AppCoordinator(appContext: context)
+        appCoordinator?.start(in: window)
     }
 
 }
-
