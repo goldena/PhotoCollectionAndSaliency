@@ -10,7 +10,6 @@
 		CF93770428A27D4E00214B9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93770328A27D4E00214B9A /* AppDelegate.swift */; };
 		CF93770628A27D4E00214B9A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93770528A27D4E00214B9A /* SceneDelegate.swift */; };
 		CF93770828A27D4E00214B9A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93770728A27D4E00214B9A /* ViewController.swift */; };
-		CF93770B28A27D4E00214B9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF93770928A27D4E00214B9A /* Main.storyboard */; };
 		CF93770D28A27D4E00214B9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF93770C28A27D4E00214B9A /* Assets.xcassets */; };
 		CF93771028A27D4E00214B9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF93770E28A27D4E00214B9A /* LaunchScreen.storyboard */; };
 		CF93771B28A27D4E00214B9A /* PhotoCollectionAndSaliencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93771A28A27D4E00214B9A /* PhotoCollectionAndSaliencyTests.swift */; };
@@ -40,7 +39,6 @@
 		CF93770328A27D4E00214B9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF93770528A27D4E00214B9A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CF93770728A27D4E00214B9A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CF93770A28A27D4E00214B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CF93770C28A27D4E00214B9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF93770F28A27D4E00214B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CF93771128A27D4E00214B9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -102,7 +100,6 @@
 				CF93770328A27D4E00214B9A /* AppDelegate.swift */,
 				CF93770528A27D4E00214B9A /* SceneDelegate.swift */,
 				CF93770728A27D4E00214B9A /* ViewController.swift */,
-				CF93770928A27D4E00214B9A /* Main.storyboard */,
 				CF93770C28A27D4E00214B9A /* Assets.xcassets */,
 				CF93770E28A27D4E00214B9A /* LaunchScreen.storyboard */,
 				CF93771128A27D4E00214B9A /* Info.plist */,
@@ -233,7 +230,6 @@
 			files = (
 				CF93771028A27D4E00214B9A /* LaunchScreen.storyboard in Resources */,
 				CF93770D28A27D4E00214B9A /* Assets.xcassets in Resources */,
-				CF93770B28A27D4E00214B9A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +293,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		CF93770928A27D4E00214B9A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CF93770A28A27D4E00214B9A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CF93770E28A27D4E00214B9A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -440,9 +428,9 @@
 				DEVELOPMENT_TEAM = 77622V66Z5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PhotoCollectionAndSaliency/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Used to display collection of photos and saliency area using ML";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -468,9 +456,9 @@
 				DEVELOPMENT_TEAM = 77622V66Z5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PhotoCollectionAndSaliency/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Used to display collection of photos and saliency area using ML";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
