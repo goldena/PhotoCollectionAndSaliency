@@ -42,6 +42,7 @@ final class AppCoordinator: Coordinator {
             photoService: appContext.photoService,
             delegate: self
         )
+        
         navigationController.pushViewController(
             photoCollectionViewController,
             animated: animated
@@ -53,7 +54,10 @@ final class AppCoordinator: Coordinator {
 extension AppCoordinator: PhotoCollectionViewControllerDelegate {
 
     func didSelect(phAsset: PHAsset) {
-        let photoViewController = PhotoViewController(with: phAsset)
+        let photoViewController = PhotoViewController(
+            phAsset: phAsset,
+            photoService: appContext.photoService
+        )
 
         navigationController.pushViewController(
             photoViewController,

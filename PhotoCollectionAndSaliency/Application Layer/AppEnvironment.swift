@@ -8,7 +8,7 @@
 enum AppEnvironment {
 
     enum photoCollection {
-        static let quantityOfPhotos = 1_000
+        static let quantityOfPhotos = 10_000
     }
 
     enum photoView {

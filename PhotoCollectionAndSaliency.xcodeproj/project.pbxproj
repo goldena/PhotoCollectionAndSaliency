@@ -28,6 +28,7 @@
 		CF93774F28A2818200214B9A /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93774E28A2818200214B9A /* PhotoViewController.swift */; };
 		CF93775328A281D900214B9A /* UICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93775228A281D900214B9A /* UICollectionViewFlowLayout.swift */; };
 		CF93775528A281E900214B9A /* ViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93775428A281E900214B9A /* ViewBuilder.swift */; };
+		CF93775728A29B4D00214B9A /* UIProgressView+resetAndHide.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93775628A29B4D00214B9A /* UIProgressView+resetAndHide.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		CF93774E28A2818200214B9A /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		CF93775228A281D900214B9A /* UICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		CF93775428A281E900214B9A /* ViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBuilder.swift; sourceTree = "<group>"; };
+		CF93775628A29B4D00214B9A /* UIProgressView+resetAndHide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIProgressView+resetAndHide.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +225,7 @@
 			children = (
 				CF93775228A281D900214B9A /* UICollectionViewFlowLayout.swift */,
 				CF93775428A281E900214B9A /* ViewBuilder.swift */,
+				CF93775628A29B4D00214B9A /* UIProgressView+resetAndHide.swift */,
 			);
 			path = "UIKit Extensions";
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 			files = (
 				CF93774528A2804500214B9A /* PhotoService.swift in Sources */,
 				CF93774D28A2815500214B9A /* PhotoCollectionViewCell.swift in Sources */,
+				CF93775728A29B4D00214B9A /* UIProgressView+resetAndHide.swift in Sources */,
 				CF93770828A27D4E00214B9A /* AppViewController.swift in Sources */,
 				CF93773628A27F2200214B9A /* AppContext.swift in Sources */,
 				CF93773428A27F0500214B9A /* Context.swift in Sources */,

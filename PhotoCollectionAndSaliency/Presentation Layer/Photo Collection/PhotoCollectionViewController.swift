@@ -16,7 +16,7 @@ final class PhotoCollectionViewController: AppViewController {
 
     private let windowSize: CGSize
 
-    private lazy var collectionViewFlowLayout: UICollectionViewFlowLayout = .photoCollectionFlowLayout(for: windowSize)
+    private lazy var collectionViewFlowLayout = UICollectionViewFlowLayout.photoCollectionFlowLayout(for: windowSize)
     private lazy var thumbnailSize = collectionViewFlowLayout.itemSize
 
     private weak var photoService: PhotoService?
