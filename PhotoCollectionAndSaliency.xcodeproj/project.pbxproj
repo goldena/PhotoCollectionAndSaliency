@@ -22,7 +22,7 @@
 		CF93773F28A27FD600214B9A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93773E28A27FD600214B9A /* AppCoordinator.swift */; };
 		CF93774328A2803200214B9A /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93774228A2803200214B9A /* Service.swift */; };
 		CF93774528A2804500214B9A /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93774428A2804500214B9A /* PhotoService.swift */; };
-		CF93774728A2809C00214B9A /* PHPhotoLibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93774628A2809C00214B9A /* PHPhotoLibraryService.swift */; };
+		CF93774728A2809C00214B9A /* PHCachingImageManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93774628A2809C00214B9A /* PHCachingImageManagerService.swift */; };
 		CF93774B28A2812A00214B9A /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93774A28A2812A00214B9A /* PhotoCollectionViewController.swift */; };
 		CF93774D28A2815500214B9A /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93774C28A2815500214B9A /* PhotoCollectionViewCell.swift */; };
 		CF93774F28A2818200214B9A /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF93774E28A2818200214B9A /* PhotoViewController.swift */; };
@@ -67,7 +67,7 @@
 		CF93773E28A27FD600214B9A /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		CF93774228A2803200214B9A /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		CF93774428A2804500214B9A /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
-		CF93774628A2809C00214B9A /* PHPhotoLibraryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPhotoLibraryService.swift; sourceTree = "<group>"; };
+		CF93774628A2809C00214B9A /* PHCachingImageManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHCachingImageManagerService.swift; sourceTree = "<group>"; };
 		CF93774A28A2812A00214B9A /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
 		CF93774C28A2815500214B9A /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		CF93774E28A2818200214B9A /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 			children = (
 				CF93774228A2803200214B9A /* Service.swift */,
 				CF93774428A2804500214B9A /* PhotoService.swift */,
-				CF93774628A2809C00214B9A /* PHPhotoLibraryService.swift */,
+				CF93774628A2809C00214B9A /* PHCachingImageManagerService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -193,9 +193,9 @@
 		CF93774128A2801800214B9A /* Presentation Layer */ = {
 			isa = PBXGroup;
 			children = (
-				CF93775128A281A700214B9A /* UIKit Extensions */,
 				CF93774828A280E100214B9A /* Photo Collection */,
 				CF93774928A280EA00214B9A /* Photo with Saliency */,
+				CF93775128A281A700214B9A /* UIKit Extensions */,
 				CF93770728A27D4E00214B9A /* AppViewController.swift */,
 			);
 			path = "Presentation Layer";
@@ -363,7 +363,7 @@
 				CF93773628A27F2200214B9A /* AppContext.swift in Sources */,
 				CF93773428A27F0500214B9A /* Context.swift in Sources */,
 				CF93770428A27D4E00214B9A /* AppDelegate.swift in Sources */,
-				CF93774728A2809C00214B9A /* PHPhotoLibraryService.swift in Sources */,
+				CF93774728A2809C00214B9A /* PHCachingImageManagerService.swift in Sources */,
 				CF93775328A281D900214B9A /* UICollectionViewFlowLayout.swift in Sources */,
 				CF93773F28A27FD600214B9A /* AppCoordinator.swift in Sources */,
 				CF93774B28A2812A00214B9A /* PhotoCollectionViewController.swift in Sources */,

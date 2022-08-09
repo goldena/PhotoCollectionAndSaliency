@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let context = AppContext(
             windowSize: window.bounds.size,
-            photoService: PHPhotoLibraryService()
+            photoService: PHCachingImageManagerService()
         )
         context.startServices()
 

@@ -22,7 +22,7 @@ final class PhotoCollectionViewController: AppViewController {
     private weak var photoService: PhotoService?
     private weak var delegate: PhotoCollectionViewControllerDelegate?
 
-    private var assets: [Int] = Array(repeating: 0, count: 10_000)
+    private var assets = PHFetchResult<PHAsset>()
 
     private var collectionView: UICollectionView {
         view as! UICollectionView
@@ -67,6 +67,39 @@ final class PhotoCollectionViewController: AppViewController {
         )
         collectionView.dataSource = self
         collectionView.delegate = self
+
+        fetchThumbnails()
+    }
+
+    private func fetchThumbnails() {
+        photoService?.requestAuthorization { [weak self] isAuthorized in
+            guard let self = self,
+                  isAuthorized else {
+                return
+            }
+
+            self.fetchPHAssets()
+        }
+    }
+
+    private func fetchPHAssets() {
+        self.photoService?.requestPHAssets(last: AppEnvironment.photoCollection.quantityOfPhotos) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+
+            switch result {
+            case .success(let phAssets):
+                self.assets = phAssets
+
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+
+            case .failure(let error):
+                print("Failed to fetch thumbnails with \(error.localizedDescription)")
+            }
+        }
     }
 
 }
@@ -94,11 +127,26 @@ extension PhotoCollectionViewController: UICollectionViewDataSource {
         }
 
         photoCell.clearContent()
-        photoCell.backgroundColor = .blue
 
         let phAsset = assets[indexPath.item]
 
-        // photoCell.localIdentifier = phAsset.localIdentifier
+        photoCell.localIdentifier = phAsset.localIdentifier
+
+        photoService?.requestThumbnail(
+            phAsset: phAsset,
+            targetSize: thumbnailSize
+        ) { result in
+            switch result {
+            case .success(let uiImage):
+                if let uiImage = uiImage,
+                   photoCell.localIdentifier == phAsset.localIdentifier {
+                    photoCell.setImage(uiImage)
+                }
+
+            case .failure(let error):
+                print("Failed to fetch \(phAsset), with \(error)")
+            }
+        }
 
         return photoCell
     }
@@ -113,7 +161,7 @@ extension PhotoCollectionViewController: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         shouldHighlightItemAt indexPath: IndexPath
     ) -> Bool {
-        // delegate?.didSelect(phAsset: assets[indexPath.item])
+        delegate?.didSelect(phAsset: assets[indexPath.item])
 
         return false
     }
