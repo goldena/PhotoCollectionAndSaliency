@@ -32,6 +32,7 @@ protocol PhotoService: Service {
 
     func requestImage(
         phAsset: PHAsset,
+        requestOwner: AppViewController?,
         _ completion: @escaping (Result<(progress: Double, UIImage?), Error>) -> Void
     )
 

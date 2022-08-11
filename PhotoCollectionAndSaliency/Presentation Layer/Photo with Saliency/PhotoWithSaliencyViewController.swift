@@ -12,6 +12,8 @@ import AVFoundation
 final class PhotoWithSaliencyViewController: AppViewController {
 
     private let phAsset: PHAsset
+    private let thumbnailSize: CGSize
+
     private weak var photoService: PhotoService?
     private weak var saliencyService: SaliencyService?
 
@@ -25,10 +27,14 @@ final class PhotoWithSaliencyViewController: AppViewController {
 
     init(
         phAsset: PHAsset,
+        thumbnailSize: CGSize,
+
         photoService: PhotoService,
         saliencyService: SaliencyService
     ) {
         self.phAsset = phAsset
+        self.thumbnailSize = thumbnailSize
+
         self.photoService = photoService
         self.saliencyService = saliencyService
 
@@ -47,7 +53,16 @@ final class PhotoWithSaliencyViewController: AppViewController {
 
         setupUI()
 
-        fetchImage(for: phAsset)
+        fetchCachedThumbnail(
+            for: phAsset,
+            thumbnailSize: thumbnailSize
+        ) { [weak self] in
+            guard let self = self else {
+                return
+            }
+
+            self.fetchImage(for: self.phAsset)
+        }
     }
 
     private func setupUI() {
@@ -117,46 +132,58 @@ final class PhotoWithSaliencyViewController: AppViewController {
         }
     }
 
+    private func fetchCachedThumbnail(
+        for: PHAsset,
+        thumbnailSize: CGSize,
+        _ completion: @escaping () -> Void
+    ) {
+        photoService?.requestThumbnail(
+            phAsset: phAsset,
+            targetSize: thumbnailSize
+        ) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+
+            switch result {
+            case .success(let image):
+                self.imageView.image = image
+
+            case .failure(let error):
+                print("Failed to fetch low definition image \(self.phAsset) with \(error)")
+            }
+
+            completion()
+        }
+    }
+
     private func fetchImage(for phAsset: PHAsset) {
         self.progressView.isHidden = false
 
-        photoService?.requestThumbnail(
+        self.photoService?.requestImage(
             phAsset: phAsset,
-            targetSize: PHImageManagerMaximumSize) { [weak self] result in
-                guard let self = self else {
-                    return
-                }
-
-                switch result {
-                case .success(let image):
-                    self.imageView.image = image
-
-                case .failure(let error):
-                    print("Failed to fetch low definition image \(phAsset) with \(error)")
-                }
-
-                self.photoService?.requestImage(phAsset: phAsset) { [weak self] result in
-                    guard let self = self else {
-                        return
-                    }
-
-                    switch result {
-                    case .success((let progress, let image)):
-                        if let image = image {
-                            self.progressView.resetAndHide()
-
-                            self.imageView.image = image
-                            self.drawSaliencyFrames()
-                        } else {
-                            self.progressView.progress = Float(progress)
-                        }
-
-                    case .failure(let error):
-                        self.progressView.resetAndHide()
-                        print("Failed to fetch high definition image \(phAsset) with \(error)")
-                    }
-                }
+            requestOwner: self
+        ) { [weak self] result in
+            guard let self = self else {
+                return
             }
+
+            switch result {
+            case .success((let progress, let image)):
+                if let image = image {
+                    self.progressView.resetAndHide()
+
+                    self.imageView.image = image
+                    self.drawSaliencyFrames()
+                } else {
+                    self.progressView.progress = Float(progress)
+                }
+
+            case .failure(let error):
+                self.progressView.resetAndHide()
+                print("Failed to fetch high definition image \(phAsset) with \(error)")
+            }
+        }
     }
 
     private func drawSaliencyFrames(base: SaliencyBase = .attention) {

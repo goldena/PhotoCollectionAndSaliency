@@ -39,6 +39,8 @@ final class AppCoordinator: Coordinator {
 
         let photoCollectionViewController = PhotoCollectionViewController(
             windowSize: window.bounds.size,
+            windowScale: window.screen.scale,
+
             photoService: appContext.photoService,
             delegate: self
         )
@@ -53,9 +55,14 @@ final class AppCoordinator: Coordinator {
 
 extension AppCoordinator: PhotoCollectionViewControllerDelegate {
 
-    func didSelect(phAsset: PHAsset) {
+    func didSelect(
+        phAsset: PHAsset,
+        thumbnailSize: CGSize
+    ) {
         let photoViewController = PhotoWithSaliencyViewController(
             phAsset: phAsset,
+            thumbnailSize: thumbnailSize,
+
             photoService: appContext.photoService,
             saliencyService: appContext.saliencyService
         )

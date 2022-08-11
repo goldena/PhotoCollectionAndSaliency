@@ -69,18 +69,18 @@ final class PHCachingImageManagerService: Service, PhotoService {
 
         let requestOptions = PHImageRequestOptions()
         requestOptions.isNetworkAccessAllowed = true
-        requestOptions.deliveryMode = .fastFormat
+        requestOptions.deliveryMode = .highQualityFormat
 
-        DispatchQueue.main.async {
-            PHCachingImageManager.default().requestImage(
+        DispatchQueue.main.async { [weak self] in
+            self?.phCachingImageManager.requestImage(
                 for: phAsset,
                 targetSize: targetSize,
                 contentMode: .aspectFit,
                 options: requestOptions
             ) { uiImage, info in
-                // Hard to reproduce - all the thumbnails are usually in memory
-                if let isIniCloud = info?[PHImageResultIsInCloudKey] as? Bool {
-                    print(isIniCloud)
+                // Reproducible on the simulator, after logging into someone's account
+                if info?[PHImageResultIsInCloudKey] as? Bool != nil {
+                    print("--> thumbnail is in the iCloud")
                 }
 
                 if let uiImage = uiImage {
@@ -92,6 +92,7 @@ final class PHCachingImageManagerService: Service, PhotoService {
 
     func requestImage(
         phAsset: PHAsset,
+        requestOwner: AppViewController?,
         _ completion: @escaping (Result<(progress: Double, UIImage?), Error>) -> Void
     ) {
         guard isAuthorized else {
@@ -103,7 +104,13 @@ final class PHCachingImageManagerService: Service, PhotoService {
         requestOptions.isNetworkAccessAllowed = true
         requestOptions.deliveryMode = .highQualityFormat
 
-        requestOptions.progressHandler = { (progress, error, _, _) in
+        requestOptions.progressHandler = { [weak requestOwner] (progress, error, stop, _) in
+            guard requestOwner != nil else {
+                stop.pointee = true
+                print("--> Image download cancelled")
+                return
+            }
+
             DispatchQueue.main.async {
                 if let error = error {
                     print("Failed to fetch \(phAsset), with error: \(error.localizedDescription)")
@@ -114,8 +121,8 @@ final class PHCachingImageManagerService: Service, PhotoService {
             }
         }
 
-        DispatchQueue.global(qos: .userInteractive).async {
-            PHCachingImageManager.default().requestImage(
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+            self?.phCachingImageManager.requestImage(
                 for: phAsset,
                 targetSize: PHImageManagerMaximumSize,
                 contentMode: .aspectFit,

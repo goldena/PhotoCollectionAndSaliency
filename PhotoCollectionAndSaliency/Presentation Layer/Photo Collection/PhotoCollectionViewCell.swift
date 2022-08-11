@@ -39,11 +39,16 @@ class PhotoCollectionViewCell: UICollectionViewCell {
 
     func clearContent() {
         localIdentifier = nil
-        thumbnailView.image = nil
+
+        DispatchQueue.main.async {
+            self.thumbnailView.image = nil
+        }
     }
 
     func setImage(_ uiImage: UIImage) {
-        thumbnailView.image = uiImage
+        DispatchQueue.main.async {
+            self.thumbnailView.image = uiImage
+        }
     }
 
 }

@@ -9,18 +9,19 @@ import UIKit
 import Photos
 
 protocol PhotoCollectionViewControllerDelegate: AnyObject {
-    func didSelect(phAsset: PHAsset)
+    func didSelect(
+        phAsset: PHAsset,
+        thumbnailSize: CGSize
+    )
 }
 
 final class PhotoCollectionViewController: AppViewController {
 
-    private let windowSize: CGSize
-
-    private lazy var collectionViewFlowLayout = UICollectionViewFlowLayout.photoCollectionFlowLayout(for: windowSize)
-    private lazy var thumbnailSize = collectionViewFlowLayout.itemSize
-
     private weak var photoService: PhotoService?
     private weak var delegate: PhotoCollectionViewControllerDelegate?
+
+    private let thumbnailSize: CGSize
+    private let collectionViewFlowLayout: UICollectionViewFlowLayout
 
     private var assets = PHFetchResult<PHAsset>()
 
@@ -30,10 +31,19 @@ final class PhotoCollectionViewController: AppViewController {
 
     init(
         windowSize: CGSize,
+        windowScale: CGFloat,
+
         photoService: PhotoService,
+
         delegate: PhotoCollectionViewControllerDelegate
     ) {
-        self.windowSize = windowSize
+        self.collectionViewFlowLayout = .photoCollectionFlowLayout(for: windowSize)
+
+        self.thumbnailSize = CGSize(
+            width: collectionViewFlowLayout.itemSize.width * windowScale,
+            height: collectionViewFlowLayout.itemSize.height * windowScale
+        )
+
         self.photoService = photoService
         self.delegate = delegate
 
@@ -192,7 +202,10 @@ extension PhotoCollectionViewController: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         shouldHighlightItemAt indexPath: IndexPath
     ) -> Bool {
-        delegate?.didSelect(phAsset: assets[indexPath.item])
+        delegate?.didSelect(
+            phAsset: assets[indexPath.item],
+            thumbnailSize: thumbnailSize
+        )
 
         return false
     }
