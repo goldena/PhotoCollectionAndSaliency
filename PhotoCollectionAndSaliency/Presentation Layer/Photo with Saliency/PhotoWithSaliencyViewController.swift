@@ -61,7 +61,9 @@ final class PhotoWithSaliencyViewController: AppViewController {
                 return
             }
 
-            self.fetchImage(for: self.phAsset)
+            self.fetchImage(for: self.phAsset) { [weak self] in
+                self?.drawSaliencyFrames()
+            }
         }
     }
 
@@ -123,10 +125,15 @@ final class PhotoWithSaliencyViewController: AppViewController {
             if completed {
                 self.imageView.transform = .identity
 
-                if self.imageView.contentMode == .scaleAspectFit {
+                switch self.imageView.contentMode {
+                case .scaleAspectFit:
                     self.imageView.contentMode = .scaleAspectFill
-                } else {
+
+                case .scaleAspectFill:
                     self.imageView.contentMode = .scaleAspectFit
+
+                default:
+                    break
                 }
             }
         }
@@ -157,7 +164,10 @@ final class PhotoWithSaliencyViewController: AppViewController {
         }
     }
 
-    private func fetchImage(for phAsset: PHAsset) {
+    private func fetchImage(
+        for phAsset: PHAsset,
+        _ completion: @escaping () -> Void
+    ) {
         self.progressView.isHidden = false
 
         self.photoService?.requestImage(
@@ -172,16 +182,19 @@ final class PhotoWithSaliencyViewController: AppViewController {
             case .success((let progress, let image)):
                 if let image = image {
                     self.progressView.resetAndHide()
-
                     self.imageView.image = image
-                    self.drawSaliencyFrames()
+
+                    completion()
                 } else {
                     self.progressView.progress = Float(progress)
                 }
 
             case .failure(let error):
-                self.progressView.resetAndHide()
                 print("Failed to fetch high definition image \(phAsset) with \(error)")
+
+                self.progressView.resetAndHide()
+
+                completion()
             }
         }
     }

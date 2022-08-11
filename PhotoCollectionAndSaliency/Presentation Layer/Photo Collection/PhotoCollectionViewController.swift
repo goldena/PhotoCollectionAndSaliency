@@ -148,7 +148,11 @@ extension PhotoCollectionViewController: UICollectionViewDataSource {
         photoService?.requestThumbnail(
             phAsset: phAsset,
             targetSize: thumbnailSize
-        ) { result in
+        ) { [weak photoCell] result in
+            guard let photoCell = photoCell else {
+                return
+            }
+
             switch result {
             case .success(let uiImage):
                 if let uiImage = uiImage,

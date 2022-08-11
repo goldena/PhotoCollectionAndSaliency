@@ -57,15 +57,18 @@ final class VisionKitSaliencyService: Service, SaliencyService {
 
             let origin = CGPoint(
                 x: boundingBox.origin.x * imageSize.width,
-                y: boundingBox.origin.y * imageSize.height
+                y: imageSize.height - boundingBox.origin.y * imageSize.height
             )
             let size = CGSize(
                 width: boundingBox.width * imageSize.width,
-                height: boundingBox.height * imageSize.height
+                height: -(boundingBox.height * imageSize.height)
             )
 
             saliencyFrames.append(
-                CGRect(origin: origin, size: size)
+                CGRect(
+                    origin: origin,
+                    size: size
+                )
             )
         }
 
